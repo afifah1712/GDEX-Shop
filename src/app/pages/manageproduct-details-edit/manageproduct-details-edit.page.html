@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Manage Product</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/manageproducts"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div >
+  <img class="image" alt="" src="{{productsForm.value.image[0]}}" />
+</div>
+  <form [formGroup]="productsForm">
+    <ion-card
+      class="ion-text-center"
+      *ngIf="!isFileUploading && !isFileUploaded"
+    >
+      <ion-card-header>
+        <ion-card-title>Choose Images to Upload</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button color="primary" size="medium">
+          <input type="file" (change)="uploadImage($event.target.files)" />
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input placeholder="Name" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Price</ion-label>
+      <ion-input placeholder="price" formControlName="price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description:</ion-label>
+      <ion-input
+        placeholder="description:"
+        formControlName="description"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select formControlName="category" multiple="false" placeholder="Select Category">
+        <ion-select-option value="men">Men</ion-select-option>
+        <ion-select-option value="women">Women</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div formArrayName="color">
+      <ion-chip *ngFor="let color of color.controls; let i=index">
+        <div [formGroupName]="i">
+        <ion-item class="chip">
+          <ion-label>
+            <ion-input
+              formControlName="color"
+              placeholder="input variation"
+            ></ion-input>
+          </ion-label>
+          <ion-icon slot="end" name="trash" (click)="removeproduct(i)"></ion-icon>        </ion-item>
+        </div>
+      </ion-chip>
+  
+    </div>
+    <ion-button
+      (click)="addcolor('')"
+      expand="block"
+      fill="clear"
+      shape="round"
+    >
+      Add Color
+    </ion-button>
+
+    <div formArrayName="size">
+      <ion-chip *ngFor="let size of size.controls; let i=index">
+        <div [formGroupName]="i">
+        <ion-item class="chip">
+          <ion-label>
+            <ion-input
+              formControlName="size"
+              placeholder="input variation"
+            ></ion-input>
+          </ion-label>
+          <ion-icon slot="end" name="trash" (click)="removeproduct(i)"></ion-icon>        </ion-item>
+        </div>
+      </ion-chip>
+  
+    </div>
+    <ion-button
+    (click)="addsize('')"
+    expand="block"
+    fill="clear"
+    shape="round"
+  >
+    Add Size
+  </ion-button>
+</form>
+
+  <ion-grid fixed>
+    <ion-row  >
+      <ion-col></ion-col>
+      <ion-col *ngFor="let size of productsForm.value.size" >{{size.size}}</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let color of productsForm.value.color;let colorindex=index" >
+      <ion-col >{{color.color}}</ion-col>
+      <ion-col *ngFor="let size of productsForm?.value?.size;let sizeindex=index">
+        <ion-input [(ngModel)]="stocklevel[colorindex][sizeindex]" type="text" placeholder="Stock"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- {{this.productsForm.value | json}} -->
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button
+      (click)="onSubmit()"
+      type="submit"
+      expand="block"
+      fill="clear"
+      shape="round"
+      color="light"
+    >
+      Save</ion-button
+    >
+  </ion-toolbar>
+  <!-- File upload progress bar -->
+  <div *ngIf="percentageVal | async as percentage">
+    Progress: {{ percentage | number }}%
+    <ion-progress-bar value="{{ percentage / 100 }}"></ion-progress-bar>
+  </div>
+  <div *ngIf="trackSnapshot | async as snap">
+    File size: {{ snap.totalBytes | formatFileSize:false }} Data transfered: {{
+    snap.bytesTransferred | formatFileSize:false }}
+  </div>
+</ion-footer>

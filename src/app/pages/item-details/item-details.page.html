@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button  class="backbtn" routerLink="/user" routerDirection="back">
+        <ion-icon slot="start" color="light" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="search-outline" color="dark"></ion-icon>
+      </ion-button>
+      <ion-button class="notification">
+        <ion-icon name="notifications-outline" color="dark"></ion-icon>
+        <span>&nbsp;</span>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides  pager="true" class="product-slider">
+    <ion-slide *ngFor="let item of iteminfo?.image">
+      <!-- <ion-img src="{{item}}" /> -->
+      <ion-img [src]="item"></ion-img>
+    </ion-slide>
+    <!-- <ion-slide>
+      <img src="../../assets/product-slider/prod-slide1.png" />
+    </ion-slide>
+    <ion-slide>
+      <img src="../../assets/product-slider/prod-slide1.png" />
+    </ion-slide> -->
+  </ion-slides>
+
+  <div class="ion-padding-vertical">
+    <h1 class="item-name">{{iteminfo?.name}}</h1>
+
+    <h4 class="price">
+      RM {{iteminfo?.price}}
+      <!-- <span class="real-price">$62</span> -->
+    </h4>
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <!-- <div class="review">
+    <ion-row>
+      <ion-col size="6">
+        <div class="rating">
+          4.5
+        </div>
+
+        Very Good
+      </ion-col>
+      <ion-col size="6">
+        <div class="count">49 Reviews</div>
+      </ion-col>
+    </ion-row>
+  </div> -->
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <div class="description">
+    <h5>Description</h5>
+
+    <p>
+      {{iteminfo?.description}}    </p>
+
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <div class="variation">
+    <ion-segment (ionChange)="segmentChanged($event)" value="size">
+      <ion-segment-button value="size">
+        <ion-label>Select Size</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="color">
+        <ion-label>Select Color</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <div class="variation-selector">
+    <div class="sizes" [class.active-variation]="activeVariation == 'size'">
+      <div *ngFor="let item of iteminfo?.size;let i=index" [class.active]="selectedSize == item" (click)="changeSize(item,i)">
+        {{item}}
+      </div>
+    </div>
+
+    <div class="colors" [class.active-variation]="activeVariation == 'color'">
+      <div *ngFor="let item of iteminfo?.color;let i=index" [class.active]="selectedColor == item" (click)="changeColor(item,i)">
+        {{item}}
+        <small>({{iteminfo.stock[iteminfo.color[i]][selectedsizeindex]}})</small>
+      </div>
+      <ion-item class="quantity">
+        <ion-button (click)='decreaseCount()'>
+          <ion-icon slot="start" name="remove-outline"></ion-icon>
+        </ion-button>
+          <ion-input  [(ngModel)]="quantity" type="number" ></ion-input>
+          <ion-button (click)='increaseCount()'>
+
+            <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+          </ion-button>
+          <!-- <ion-icon slot="start" name="add-outline"></ion-icon> -->
+
+          <!-- <span class="up" (click)='increaseCount()'>+</span> -->
+  
+      </ion-item>
+    </div>
+  
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button (click)="addtocart()" expand="full" color="light">Add to cart</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button (click)="buynow()" class="buybutton" expand="full">Buy now</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

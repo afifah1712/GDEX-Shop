@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="end">
+      <ion-button (click)="signOut()">
+        <ion-icon name="log-out" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Admin Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card routerLink="{{list.link}}" *ngFor="let list of infos" class="cards">
+    <ion-card-title >{{list.name}}
+    </ion-card-title>
+    <ion-card-content>
+      <!-- <ion-icon (click)="delete(info.id)" name="trash" slot="end"></ion-icon> -->
+      
+    </ion-card-content>
+    <ion-icon  name={{list.icon}}></ion-icon>  </ion-card>
+  <ion-card>
+  
+  </ion-card>
+  
+
+
+</ion-content>

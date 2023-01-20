@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cart</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/user">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card class="cardhistory" *ngFor="let itemlist of cartlist">
+  <ion-card-header>
+    <ion-card-subtitle>{{itemlist.name}}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+   <ion-card *ngFor="let item of itemlist.data;let i=index">
+      <ion-item>
+        <ion-label>Color</ion-label>
+        <ion-label slot="end">{{item.color}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Quantity</ion-label>
+        <ion-label slot="end">{{item.quantity}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Size</ion-label>
+        <ion-label slot="end">{{item.size}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Price</ion-label>
+        <ion-label slot="end">RM {{item.price}}</ion-label>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label>Quantity</ion-label>
+        <ion-label slot="end">{{item.quantity}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Total</ion-label>
+        <ion-label slot="end">{{item.size}}</ion-label>
+      </ion-item> -->
+   </ion-card>
+  </ion-card-content>
+</ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar >
+<ion-item class="carttotal">
+  <ion-label>Total:</ion-label>
+  <p>RM {{totalprice()}} </p>
+  <ion-button (click)="checkoutmodal()" expand="block" shape="round">
+    Pay
+  </ion-button>
+</ion-item>
+  </ion-toolbar>
+</ion-footer>

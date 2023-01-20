@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Role Manager</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-item *ngFor="let user of userlist">
+    <ion-label>{{user.first_name}} {{user.last_name}}</ion-label>
+<ion-item>
+  <ion-select (ionChange)="updaterole(user)" value="{{user.role}}" [(ngModel)]="user.role" multiple="false" placeholder="Select Pizza">
+    <ion-select-option value="ADMIN">Admin</ion-select-option>
+    <ion-select-option value="USER">User</ion-select-option>
+    <ion-select-option value="EMPLOYEE">Employee</ion-select-option>
+    <ion-select-option value="UNVERIFIED">Unverified</ion-select-option>
+
+  </ion-select>
+</ion-item>
+  </ion-item>
+</ion-list>
+</ion-content>

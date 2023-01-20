@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Purchase</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="user"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card class="cardhistory" *ngFor="let order of orderlist">
+  <ion-card-header>
+    <ion-card-subtitle>Order ID: {{order.id}}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content >
+    
+<div  *ngFor="let product of order.products">
+  <ion-item lines="none" class="itemname">
+    <ion-label>Name</ion-label>
+    <p>{{product.name}}</p>
+  </ion-item>
+  <!-- <div *ngIf="check(product)"> -->
+  <ion-card  *ngFor="let variation of product.data">
+    
+    <ion-item >
+      <ion-label>Color</ion-label>
+      <p>{{variation.color}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>Size</ion-label>
+      <p>{{variation.size}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>Quantity</ion-label>
+      <p>{{variation.quantity}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price</ion-label>
+      <p>RM {{variation.price}}</p>
+    </ion-item>
+  </ion-card>
+  <ion-col lines="none"  class="total">
+    <p>{{order.userinfo?.address}},{{order.userinfo?.postcode}},{{order.userinfo?.city}},{{order.userinfo?.state}}</p>
+  </ion-col>
+<!-- </div> -->
+</div>
+  </ion-card-content>
+  <ion-item class="total">
+    <ion-label>Total</ion-label>
+    <p>RM {{order.totalprice}}</p>
+  </ion-item>
+</ion-card>
+</ion-content>

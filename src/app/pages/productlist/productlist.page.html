@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Products</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/user"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="search ion-padding">
+    <ion-item lines="none">
+      <ion-input type="text"
+      [(ngModel)]="searchterm"
+      class="searchTerm"
+      placeholder="What are you looking for?"></ion-input>
+      <ion-icon  name="search-outline" slot="start"></ion-icon>
+    </ion-item>
+  </div>
+    <div class="column" *ngFor="let product of productlist| filter: searchterm;trackBy:identify">
+      <div class="card">
+        <ion-col class="ion-text-left" routerLink="/item-details/{{product.id}}" routerDirection="forward">
+          <img src="{{ product.image[0] }}" />
+          <p>RM {{ product.price }}</p>
+          <h6>{{ product.name }}</h6>
+        </ion-col>
+      </div>
+    </div>
+    <!-- <div class="column">
+      <div class="card">..</div>
+    </div>
+    <div class="column">
+      <div class="card">..</div>
+    </div>
+    <div class="column">
+      <div class="card">..</div>
+    </div> -->
+  <div >
+    
+<!--   
+    <div class="product-slider ion-padding-start">
+        <ion-card *ngFor="let product of productlist| filter: searchterm;trackBy:identify">
+          <ion-col class="ion-text-left" routerLink="/item-details/{{product.id}}" routerDirection="forward">
+            <img src="{{ product.image[0] }}" />
+            <p>RM {{ product.price }}</p>
+            <h6>{{ product.name }}</h6>
+          </ion-col>
+        </ion-card>
+    </div> -->
+  
+  </div>
+</ion-content>

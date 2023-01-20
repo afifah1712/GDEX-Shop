@@ -1,0 +1,22 @@
+.image{
+    max-width: 300px;
+    object-position: center;
+    margin-top: 10px;
+  
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.chip{
+    background-color: transparent;
+    --background: transparent;
+    max-width: 200px;
+}
+ion-col {
+    background-color: #135d54;
+    border: solid 1px #fff;
+    color: #fff;
+    text-align: center;
+  }
